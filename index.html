@@ -1,0 +1,475 @@
+<!doctype html>
+<html lang="es-UY">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="light dark">
+  <title>Survans Web Prototipo</title>
+  <meta name="description" content="Prototipo de la nueva home de Survans: traslados en van con paradas fijas para quienes trabajan en barrios privados, con reserva por WhatsApp y asistente IA (en desarrollo), más transfers y tours.">
+  <script>document.documentElement.classList.add('js');</script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@600;700&family=Barlow:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+  <link rel="stylesheet" href="tokens.css">
+  <link rel="stylesheet" href="styles.css">
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
+
+  <!-- 0. HEADER -->
+  <header class="site-header">
+    <div class="container header__bar">
+      <a class="brand" href="#inicio">SURVANS</a>
+      <span class="tag" data-status="confirmar">Logo a confirmar</span>
+      <button type="button" class="menu-btn" id="menu-btn" aria-expanded="false" aria-controls="site-menu">
+        <span class="menu-btn__icon" aria-hidden="true"></span>
+        <span>Menú</span>
+      </button>
+      <div class="site-menu" id="site-menu">
+        <nav aria-label="Principal">
+          <ul class="nav-list" role="list">
+            <li><a href="#barrios">Barrios privados</a></li>
+            <li><a href="#como-funciona">Cómo funciona</a></li>
+            <li><a href="#personal">Personal y empresas</a></li>
+            <li><a href="#transfers">Transfers y tours</a></li>
+            <li><a href="#nosotros">Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+          </ul>
+        </nav>
+        <a class="btn btn--primary" href="#reservar">Reservar por WhatsApp</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="contenido" tabindex="-1">
+
+    <!-- 1. HERO -->
+    <section class="hero" id="inicio" aria-labelledby="hero-title">
+      <div class="container">
+        <div class="hero__grid">
+          <div class="hero__copy">
+            <p class="eyebrow">
+              <span>Barrios privados · Nuevo canal de reservas</span>
+              <span class="tag" data-status="proximamente">En desarrollo</span>
+            </p>
+            <h1 id="hero-title">Tu viaje al barrio se reserva por WhatsApp.</h1>
+            <p class="lead">Traslados en van con paradas fijas para quienes trabajan en barrios privados. Escribís al número de Survans, el asistente reconoce tu registro y te guía para reservar el próximo viaje, sin descargar ninguna app.</p>
+            <div class="actions">
+              <a class="btn btn--primary" href="#reservar">Reservar por WhatsApp</a>
+              <a class="btn btn--secondary" href="#como-funciona">Cómo me registro</a>
+              <span class="tag" data-status="confirmar">Número del asistente a confirmar</span>
+            </div>
+          </div>
+
+          <figure class="chat" aria-labelledby="chat-title">
+            <figcaption class="chat__bar">
+              <span class="chat__title" id="chat-title">Chat de WhatsApp</span>
+              <span class="tag" data-status="ilustrativo">Ejemplo ilustrativo</span>
+            </figcaption>
+            <ul class="chat__list" role="list">
+              <li class="msg msg--out"><span class="sr-only">Pasajero: </span>Hola, quiero reservar para mañana a la mañana</li>
+              <li class="msg msg--in"><span class="sr-only">Asistente: </span>Hola. Tu registro está aprobado. Para mañana martes hay salida a las <span class="mono">08:00</span>. ¿Te reservo un lugar?</li>
+              <li class="msg msg--out"><span class="sr-only">Pasajero: </span>Sí</li>
+              <li class="msg msg--in"><span class="sr-only">Asistente: </span>Listo, reservado: martes <span class="mono">08:00</span>.</li>
+            </ul>
+          </figure>
+        </div>
+
+        <figure class="route-fig" aria-labelledby="route-cap">
+          <figcaption class="route-fig__cap" id="route-cap">
+            <span class="route-fig__title">Recorrido de referencia · ida / vuelta</span>
+            <span class="tag" data-status="confirmar">Paradas y horarios a confirmar</span>
+          </figcaption>
+          <div class="route-track" data-live-route>
+            <span class="route__van" aria-hidden="true">
+              <svg viewBox="0 0 40 22" width="40" height="22" focusable="false"><path class="van__body" d="M3 4h22l7 6h4a2 2 0 0 1 2 2v4a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V5a1 1 0 0 1 1-1z"/><path class="van__glass" d="M6 7h6v4H6zM14 7h6v4h-6zM22 7h2.5l4 4H22z"/><circle class="van__wheel" cx="10" cy="17.5" r="3"/><circle class="van__wheel" cx="29" cy="17.5" r="3"/></svg>
+            </span>
+          <ol class="route route--live" role="list">
+            <li class="route__stop route__stop--end"><span class="route__dot" aria-hidden="true"></span><span class="route__label">Portones de Carrasco</span></li>
+            <li class="route__stop"><span class="route__dot" aria-hidden="true"></span><span class="route__label">Parada</span></li>
+            <li class="route__stop"><span class="route__dot" aria-hidden="true"></span><span class="route__label">Parada</span></li>
+            <li class="route__stop"><span class="route__dot" aria-hidden="true"></span><span class="route__label">Parada</span></li>
+            <li class="route__stop route__stop--end"><span class="route__dot" aria-hidden="true"></span><span class="route__label">Barrios privados</span></li>
+          </ol>
+          </div>
+        </figure>
+      </div>
+    </section>
+
+    <!-- 2. CÓMO ME REGISTRO -->
+    <section class="section" id="como-funciona" aria-labelledby="como-title">
+      <div class="container">
+        <header class="section__head">
+          <h2 id="como-title">Cómo me registro</h2>
+        </header>
+        <div class="split">
+          <ol class="steps" role="list">
+            <li class="steps__item">
+              <span class="steps__num" aria-hidden="true">1</span>
+              <div class="steps__body">
+                <h3>Te registrás</h3>
+                <p>Indicás el barrio, la vivienda donde trabajás (casa, solar o manzana) y la referencia del propietario o de quien te contrata.</p>
+              </div>
+            </li>
+            <li class="steps__item">
+              <span class="steps__num" aria-hidden="true">2</span>
+              <div class="steps__body">
+                <h3>El barrio verifica</h3>
+                <p>La administración del barrio contacta a tu referente para confirmar que trabajás allí.</p>
+              </div>
+            </li>
+            <li class="steps__item">
+              <span class="steps__num" aria-hidden="true">3</span>
+              <div class="steps__body">
+                <h3>El barrio aprueba</h3>
+                <p>La autorización la decide el administrador del barrio.</p>
+              </div>
+            </li>
+            <li class="steps__item">
+              <span class="steps__num" aria-hidden="true">4</span>
+              <div class="steps__body">
+                <h3>Te avisamos y ya podés viajar</h3>
+                <p>Recibís la notificación y desde ese momento gestionás tus reservas.</p>
+              </div>
+            </li>
+          </ol>
+          <aside class="note" aria-label="Invitados">
+            <p>¿Venís de visita? El propietario o inquilino solicita la autorización para un viaje puntual, indicando día y hora.</p>
+            <p><span class="tag" data-status="confirmar">Canal para invitados a confirmar</span></p>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. CUÁNDO PODÉS RESERVAR -->
+    <section class="section section--alt" id="reservar" aria-labelledby="reservar-title">
+      <div class="container">
+        <header class="section__head">
+          <h2 id="reservar-title">Cuándo podés reservar</h2>
+          <p class="lead">Abre 24 horas antes y cierra 15 minutos antes de la salida de la camioneta.</p>
+        </header>
+
+        <figure class="route-fig" aria-labelledby="timeline-cap">
+          <figcaption class="route-fig__cap" id="timeline-cap">
+            <span class="route-fig__title">Ventana de reserva</span>
+            <span class="tag" data-status="ilustrativo">Ejemplo ilustrativo</span>
+          </figcaption>
+          <ol class="route route--timeline" role="list">
+            <li class="route__stop route__stop--end">
+              <span class="route__dot" aria-hidden="true"></span>
+              <span class="route__label"><span class="route__kind">Abre</span><span class="sr-only">, </span><span class="mono">lunes 08:00</span></span>
+            </li>
+            <li class="route__stop">
+              <span class="route__dot" aria-hidden="true"></span>
+              <span class="route__label"><span class="route__kind">Cierra</span><span class="sr-only">, </span><span class="mono">martes 07:45</span></span>
+            </li>
+            <li class="route__stop route__stop--end">
+              <span class="route__dot" aria-hidden="true"></span>
+              <span class="route__label"><span class="route__kind">Salida</span><span class="sr-only">, </span><span class="mono">martes 08:00</span></span>
+            </li>
+          </ol>
+        </figure>
+
+        <div class="calc" role="group" aria-labelledby="calc-title">
+          <h3 id="calc-title">Calculadora de ventana de reserva</h3>
+          <p><span class="tag" data-status="confirmar">Herramienta de ejemplo: los horarios reales de cada servicio están a confirmar</span></p>
+          <div class="calc__fields">
+            <div class="field">
+              <label for="calc-dia">Día de salida</label>
+              <select id="calc-dia" name="calc-dia">
+                <option value="0">Lunes</option>
+                <option value="1" selected>Martes</option>
+                <option value="2">Miércoles</option>
+                <option value="3">Jueves</option>
+                <option value="4">Viernes</option>
+                <option value="5">Sábado</option>
+                <option value="6">Domingo</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="calc-salida">Hora de salida</label>
+              <input type="time" id="calc-salida" name="calc-salida" value="08:00" aria-describedby="calc-result">
+            </div>
+          </div>
+          <div class="calc__result" id="calc-result" aria-live="polite" aria-atomic="true" data-state="ok">Podés reservar desde el <strong>lunes</strong> a las <span class="mono">08:00</span> hasta el <strong>martes</strong> a las <span class="mono">07:45</span></div>
+        </div>
+
+        <div class="actions actions--cta">
+          <a class="btn btn--primary" href="https://wa.me/59898502880" target="_blank" rel="noopener noreferrer">Reservar por WhatsApp<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+          <span class="tag" data-status="confirmar">Número del asistente a confirmar</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. BARRIOS -->
+    <section class="section" id="barrios" aria-labelledby="barrios-title">
+      <div class="container">
+        <header class="section__head">
+          <h2 id="barrios-title">Barrios donde operamos</h2>
+        </header>
+        <div class="grid-3">
+          <article class="group">
+            <h3>La Tahona</h3>
+            <ul class="stops-list" role="list">
+              <li>Altos de la Tahona</li>
+              <li>Carmel</li>
+              <li>Viñedos de la Tahona</li>
+            </ul>
+          </article>
+          <article class="group">
+            <h3>Barrios del Polo</h3>
+            <ul class="stops-list" role="list">
+              <li>Los Olivos</li>
+              <li>San Nicolás</li>
+              <li>Parques Barrio Jardín</li>
+              <li>Zen Pueblo Jardín</li>
+            </ul>
+          </article>
+          <article class="group">
+            <h3>Portones de Carrasco</h3>
+            <p>Recorrido de referencia ida / vuelta</p>
+            <p><span class="tag" data-status="confirmar">No figura en la web actual</span></p>
+          </article>
+        </div>
+        <div class="barrios__foot">
+          <p class="barrios__note">Horarios, paradas y tarifas de cada barrio <span class="tag" data-status="confirmar">A confirmar</span></p>
+          <p>¿Tu barrio no está? <a href="#contacto">Escribinos.</a></p>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. ADMINISTRACIONES -->
+    <section class="section section--alt" id="administraciones" aria-labelledby="admin-title">
+      <div class="container">
+        <header class="section__head">
+          <h2 id="admin-title">El nuevo sistema, para barrios y pasajeros</h2>
+          <p><span class="tag" data-status="proximamente">Nuevo sistema en desarrollo</span></p>
+        </header>
+        <dl class="features">
+          <div class="feature">
+            <dt>Usuarios y autorizaciones</dt>
+            <dd>Aprobás quién puede viajar.</dd>
+          </div>
+          <div class="feature">
+            <dt>Reportes de viajes</dt>
+            <dd>Quién viajó, qué días y en qué horarios.</dd>
+          </div>
+          <div class="feature">
+            <dt>Avisos a los pasajeros</dt>
+            <dd>Por ejemplo, avisar con anticipación que el 1.º de mayo no habrá servicio.</dd>
+          </div>
+          <div class="feature">
+            <dt>Ubicación de la van</dt>
+            <dd>A pedido por WhatsApp, el pasajero recibe un enlace para ver por dónde viene su camioneta. <span class="tag" data-status="confirmar">Proveedor GPS a confirmar</span></dd>
+          </div>
+        </dl>
+        <div class="actions actions--cta">
+          <a class="btn btn--secondary" href="#contacto">Hablar con Survans</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. PERSONAL Y EMPRESAS -->
+    <section class="section" id="personal" aria-labelledby="personal-title">
+      <div class="container">
+        <header class="section__head">
+          <h2 id="personal-title">Traslado de personal para empresas, instituciones y urbanizaciones</h2>
+        </header>
+        <div class="split split--media">
+          <div class="stack">
+            <blockquote class="pullquote">
+              <p>“Somos la primera empresa de traslados de pasajeros para Zonamerica.”</p>
+              <footer>Cita del sitio actual</footer>
+            </blockquote>
+            <ul class="stops-list" role="list">
+              <li>Puntualidad y menos ausentismo</li>
+              <li>Menos dependencia de paros del transporte público</li>
+              <li>Menos necesidad de estacionamiento</li>
+            </ul>
+            <p class="stat">Una van con <span class="mono">15</span> pasajeros reemplaza a <span class="mono">7</span> autos.</p>
+            <div class="actions actions--cta">
+              <a class="btn btn--primary" href="https://wa.me/59898485990" target="_blank" rel="noopener noreferrer">WhatsApp eventos y personal: 098 485 990<span class="sr-only"> (se abre en una pestaña nueva)</span></a>
+            </div>
+          </div>
+          <div class="ph ph--photo" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. TRANSFERS Y TOURS -->
+    <section class="section section--alt" id="transfers" aria-labelledby="transfers-title">
+      <div class="container">
+        <header class="section__head">
+          <h2 id="transfers-title">Transfers y tours</h2>
+        </header>
+        <div class="boards">
+          <section class="board" aria-labelledby="board-transfers">
+            <h3 id="board-transfers" class="board__title">Transfers</h3>
+            <ul class="board__list" role="list">
+              <li class="board__row"><span class="board__name">Aeropuerto de Carrasco</span><span class="board__fill" aria-hidden="true"></span><span class="board__price">U$S 38</span></li>
+              <li class="board__row"><span class="board__name">Puerto de Montevideo</span><span class="board__fill" aria-hidden="true"></span><span class="board__price board__price--ask">Consultar</span></li>
+              <li class="board__row"><span class="board__name">Eventos (grupales e individuales)</span><span class="board__fill" aria-hidden="true"></span><span class="board__price board__price--ask">Consultar</span></li>
+              <li class="board__row"><span class="board__name">Colonia desde Montevideo</span><span class="board__fill" aria-hidden="true"></span><span class="board__price board__price--ask">Consultar</span></li>
+              <li class="board__row"><span class="board__name">Punta del Este desde Montevideo</span><span class="board__fill" aria-hidden="true"></span><span class="board__price board__price--ask">Consultar</span></li>
+            </ul>
+          </section>
+          <section class="board" aria-labelledby="board-tours">
+            <h3 id="board-tours" class="board__title">Tours</h3>
+            <ul class="board__list" role="list">
+              <li class="board__row"><span class="board__name">Full Day Punta del Este</span><span class="board__fill" aria-hidden="true"></span><span class="board__price">U$S 250</span></li>
+              <li class="board__row"><span class="board__name">City Tour Montevideo</span><span class="board__fill" aria-hidden="true"></span><span class="board__price">U$S 120</span></li>
+              <li class="board__row"><span class="board__name">Full Day Colonia</span><span class="board__fill" aria-hidden="true"></span><span class="board__price">U$S 300</span></li>
+              <li class="board__row"><span class="board__name">Full Day José Ignacio</span><span class="board__fill" aria-hidden="true"></span><span class="board__price">U$S 300</span></li>
+            </ul>
+          </section>
+        </div>
+        <p class="board__note">Precios publicados en survans.com.uy al 09/10/2026 <span class="tag" data-status="confirmar">Vigencia a confirmar</span></p>
+      </div>
+    </section>
+
+    <!-- 8. NOSOTROS -->
+    <section class="section" id="nosotros" aria-labelledby="nosotros-title">
+      <div class="container">
+        <header class="section__head">
+          <h2 id="nosotros-title">Nosotros</h2>
+          <p class="lead lead--display">Desde 2003 trasladando personas en Uruguay.</p>
+        </header>
+        <ul class="stops-list stops-list--wide" role="list">
+          <li>Más de 20 años de trayectoria</li>
+          <li>Vehículos aprobados por el Ministerio de Transporte y Obras Públicas</li>
+          <li>“Líder en el traslado de personal en Zona América” <span class="muted">(cita del sitio actual)</span></li>
+        </ul>
+
+        <div class="about-blocks">
+          <div class="about-block" role="group" aria-labelledby="clientes-title">
+            <h3 id="clientes-title">Empresas que nos eligen</h3>
+            <ul class="logos" role="list" aria-label="Logos de clientes a confirmar">
+              <li class="ph ph--logo"></li>
+              <li class="ph ph--logo"></li>
+              <li class="ph ph--logo"></li>
+              <li class="ph ph--logo"></li>
+              <li class="ph ph--logo"></li>
+              <li class="ph ph--logo"></li>
+            </ul>
+            <p><span class="tag" data-status="confirmar">Nombres y logos a confirmar (el sitio actual muestra 24 logos sin nombre)</span></p>
+          </div>
+          <div class="about-block" role="group" aria-labelledby="flota-title">
+            <h3 id="flota-title">Flota</h3>
+            <div class="ph ph--photo" aria-hidden="true"></div>
+            <p><span class="tag" data-status="confirmar">Cantidad y modelos a confirmar</span></p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. FAQ -->
+    <section class="section section--alt" id="preguntas" aria-labelledby="faq-title">
+      <div class="container">
+        <header class="section__head">
+          <h2 id="faq-title">Preguntas frecuentes</h2>
+        </header>
+        <div class="faq">
+          <details>
+            <summary>¿Necesito descargar una app?</summary>
+            <div class="faq__answer"><p>Con el nuevo sistema, no: el registro y las reservas se van a hacer por WhatsApp con un asistente. <span class="tag" data-status="proximamente">Próximamente</span></p></div>
+          </details>
+          <details>
+            <summary>¿Cuándo puedo reservar?</summary>
+            <div class="faq__answer"><p>Desde <span class="mono">24 h</span> antes hasta <span class="mono">15 min</span> antes de la salida.</p></div>
+          </details>
+          <details>
+            <summary>¿Quién me autoriza a viajar?</summary>
+            <div class="faq__answer"><p>La administración de tu barrio, después de verificar con tu referente.</p></div>
+          </details>
+          <details>
+            <summary>¿Puedo saber por dónde viene la van?</summary>
+            <div class="faq__answer"><p>Con el nuevo sistema, vas a poder pedirlo por WhatsApp y recibir un enlace con la ubicación. <span class="tag" data-status="proximamente">Próximamente</span></p></div>
+          </details>
+          <details>
+            <summary>¿Me avisan si no hay servicio?</summary>
+            <div class="faq__answer"><p>Con el nuevo sistema, Survans va a enviar avisos con anticipación; por ejemplo, que el 1.º de mayo no habrá servicio. <span class="tag" data-status="proximamente">Próximamente</span></p></div>
+          </details>
+          <details>
+            <summary>¿Puedo cancelar una reserva?</summary>
+            <div class="faq__answer"><p><span class="tag" data-status="confirmar">Política de cancelación a confirmar</span></p></div>
+          </details>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. CONTACTO -->
+    <section class="section" id="contacto" aria-labelledby="contacto-title">
+      <div class="container">
+        <header class="section__head">
+          <h2 id="contacto-title">Contacto</h2>
+        </header>
+        <div class="contact">
+          <div class="contact__numbers">
+            <div class="contact-num">
+              <p class="contact-num__label">WhatsApp general</p>
+              <p class="contact-num__value"><span class="mono num" id="num-general">098 502 880</span></p>
+              <div class="actions">
+                <a class="btn btn--primary" href="https://wa.me/59898502880" target="_blank" rel="noopener noreferrer">Abrir WhatsApp<span class="sr-only"> general (se abre en una pestaña nueva)</span></a>
+                <button type="button" class="btn btn--secondary" data-copy="num-general" aria-label="Copiar número 098 502 880">Copiar</button>
+              </div>
+              <p class="copy-status" aria-live="polite"></p>
+            </div>
+            <div class="contact-num">
+              <p class="contact-num__label">Eventos y traslado de personal</p>
+              <p class="contact-num__value"><span class="mono num" id="num-eventos">098 485 990</span></p>
+              <div class="actions">
+                <a class="btn btn--primary" href="https://wa.me/59898485990" target="_blank" rel="noopener noreferrer">Abrir WhatsApp<span class="sr-only"> de eventos y personal (se abre en una pestaña nueva)</span></a>
+                <button type="button" class="btn btn--secondary" data-copy="num-eventos" aria-label="Copiar número 098 485 990">Copiar</button>
+              </div>
+              <p class="copy-status" aria-live="polite"></p>
+            </div>
+            <dl class="tbd-list">
+              <div class="tbd-list__row"><dt>Email</dt><dd><span class="tag" data-status="confirmar">Email a confirmar</span></dd></div>
+              <div class="tbd-list__row"><dt>Dirección</dt><dd><span class="tag" data-status="confirmar">Dirección a confirmar</span></dd></div>
+              <div class="tbd-list__row"><dt>Horario de atención</dt><dd><span class="tag" data-status="confirmar">Horario de atención a confirmar</span></dd></div>
+            </dl>
+          </div>
+
+          <form class="form" id="contact-form" novalidate aria-labelledby="form-title">
+            <h3 id="form-title">Escribinos</h3>
+            <div class="field">
+              <label for="f-nombre">Nombre <span class="field__req">(obligatorio)</span></label>
+              <input type="text" id="f-nombre" name="nombre" autocomplete="name" required aria-required="true">
+              <p class="field__error" id="f-nombre-error" hidden></p>
+            </div>
+            <div class="field">
+              <label for="f-barrio">Barrio o empresa <span class="field__req">(opcional)</span></label>
+              <input type="text" id="f-barrio" name="barrio" autocomplete="organization">
+            </div>
+            <div class="field">
+              <label for="f-mensaje">Mensaje <span class="field__req">(obligatorio)</span></label>
+              <textarea id="f-mensaje" name="mensaje" rows="5" required aria-required="true"></textarea>
+              <p class="field__error" id="f-mensaje-error" hidden></p>
+            </div>
+            <div class="actions">
+              <button type="submit" class="btn btn--primary">Enviar mensaje</button>
+            </div>
+            <p class="form__status" id="form-status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- 11. FOOTER -->
+  <footer class="site-footer">
+    <div class="container footer__inner">
+      <p>© SURVANS</p>
+      <p>Prototipo de diseño v2 — Artificialmente — 09/10/2026</p>
+      <p><a href="https://survans.com.uy" target="_blank" rel="noopener noreferrer">survans.com.uy (sitio actual)<span class="sr-only"> (se abre en una pestaña nueva)</span></a></p>
+    </div>
+  </footer>
+
+  <button type="button" class="marks-btn" id="marks-toggle" aria-pressed="true">
+    <span class="marks-btn__dot" aria-hidden="true"></span>
+    <span>Marcas de revisión</span>
+  </button>
+</body>
+</html>
