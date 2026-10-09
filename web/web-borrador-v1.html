@@ -1,0 +1,882 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Survans · Transfers y traslado de pasajeros en Uruguay</title>
+<meta name="description" content="Más de 20 años trasladando pasajeros en Uruguay: traslado de personal, barrios privados, transfers al aeropuerto, eventos y tours. Reservas por WhatsApp.">
+<link rel="icon" href="https://www.survans.com.uy/favicon.ico">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ===== Tokens (Survans design system) ===== */
+:root{
+  --surface:#f6f8fb; --surface-raised:#ffffff; --ink:#13263b; --ink-muted:#52637a;
+  --border:#c9d3df; --border-strong:#74859a;
+  --brand:#1d4e89; --brand-strong:#13375f; --brand-soft:#e2ecf7; --on-brand:#ffffff;
+  --route:#0d7a72; --route-soft:#dcf1ee;
+  --success:#1e7538; --warning:#8f5400; --danger:#b3261e;
+  --space-1:4px; --space-2:8px; --space-4:16px; --space-6:24px; --space-8:32px; --space-12:48px;
+  --radius-sm:6px; --radius-md:12px; --radius-pill:9999px;
+  --shadow-card:0 1px 2px rgba(19,38,59,.06),0 4px 12px rgba(19,38,59,.06);
+  --font-sans:"Montserrat",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --wrap:1160px;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --surface:#0d1724; --surface-raised:#15222f; --ink:#eaf0f6; --ink-muted:#a3b2c4;
+    --border:#3a4b5e; --border-strong:#6f8297;
+    --brand:#7aacea; --brand-strong:#a9cbf3; --brand-soft:#1b3452; --on-brand:#0d1724;
+    --route:#4cc3b8; --route-soft:#123a37;
+    --success:#62cf86; --warning:#f0b450; --danger:#f2867e;
+    --shadow-card:0 1px 2px rgba(0,0,0,.3),0 4px 12px rgba(0,0,0,.25);
+  }
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;background:var(--surface);color:var(--ink);font-family:var(--font-sans);font-size:16px;line-height:24px;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+a{color:var(--brand)}
+a:hover{color:var(--brand-strong)}
+:focus-visible{outline:3px solid var(--route);outline-offset:2px}
+h1,h2,h3{margin:0;letter-spacing:-.01em}
+h2{font-size:28px;line-height:36px;font-weight:700}
+h3{font-size:20px;line-height:28px;font-weight:600}
+p{margin:0}
+.wrap{max-width:var(--wrap);margin:0 auto;padding:0 var(--space-4)}
+@media(min-width:768px){.wrap{padding:0 var(--space-6)}}
+.sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.eyebrow{display:inline-flex;align-items:center;gap:var(--space-2);font-size:13px;line-height:16px;font-weight:600;color:var(--route);margin-bottom:var(--space-2)}
+.eyebrow::before{content:"";width:8px;height:8px;border-radius:var(--radius-pill);background:var(--route)}
+.lead{color:var(--ink-muted);max-width:640px;margin-top:var(--space-2)}
+section{padding:var(--space-12) 0}
+@media(min-width:768px){section{padding:72px 0}}
+.section-head{margin-bottom:var(--space-8)}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:var(--space-2);min-height:44px;padding:10px 20px;border-radius:var(--radius-md);font:600 15px/20px var(--font-sans);text-decoration:none;border:1.5px solid transparent;cursor:pointer;transition:background .2s,color .2s,border-color .2s,transform .2s}
+.btn:active{transform:translateY(1px)}
+.btn-primary{background:var(--brand);color:var(--on-brand)}
+.btn-primary:hover{background:var(--brand-strong);color:var(--on-brand)}
+.btn-route{background:var(--route);color:var(--on-brand)}
+.btn-route:hover{filter:brightness(.92);color:var(--on-brand)}
+.btn-ghost{background:transparent;color:var(--ink);border-color:var(--border-strong)}
+.btn-ghost:hover{border-color:var(--brand);color:var(--brand)}
+.btn-light{background:#fff;color:#13263b}
+.btn-light:hover{background:#e2ecf7;color:#13263b}
+.btn-outline-light{background:transparent;color:#fff;border-color:rgba(255,255,255,.7)}
+.btn-outline-light:hover{background:rgba(255,255,255,.12);color:#fff}
+.btn[disabled],.btn[aria-disabled="true"]{opacity:.5;pointer-events:none}
+.ico{width:20px;height:20px;flex:none}
+
+/* Header */
+.topbar{background:var(--brand-strong);color:#fff;font-size:13px;line-height:16px}
+.topbar .wrap{display:flex;justify-content:space-between;align-items:center;gap:var(--space-4);min-height:36px}
+.topbar a{color:#fff;text-decoration:none;opacity:.9}
+.topbar a:hover{opacity:1;text-decoration:underline;color:#fff}
+.topbar .langs{display:flex;gap:var(--space-2)}
+.topbar .langs a[aria-current]{font-weight:700;opacity:1}
+.topbar .contact{display:none;gap:var(--space-4)}
+@media(min-width:768px){.topbar .contact{display:flex}}
+header.site{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--surface-raised) 92%,transparent);backdrop-filter:saturate(1.4) blur(10px);border-bottom:1px solid var(--border)}
+header.site .wrap{display:flex;align-items:center;justify-content:space-between;min-height:68px;gap:var(--space-4)}
+.logo{display:flex;align-items:center;text-decoration:none}
+.logo img{height:40px;width:auto}
+.logo .wordmark{font-weight:700;letter-spacing:.04em;font-size:22px;color:var(--brand)}
+nav.main ul{list-style:none;margin:0;padding:0;display:flex;gap:var(--space-1)}
+nav.main a{display:block;padding:10px 12px;border-radius:var(--radius-sm);color:var(--ink);text-decoration:none;font-weight:500;font-size:15px}
+nav.main a:hover{background:var(--brand-soft);color:var(--ink)}
+.header-cta{display:none}
+.menu-toggle{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border-radius:var(--radius-md);border:1.5px solid var(--border-strong);background:transparent;color:var(--ink);cursor:pointer}
+@media(max-width:1023px){
+  nav.main{position:absolute;top:100%;left:0;right:0;background:var(--surface-raised);border-bottom:1px solid var(--border);box-shadow:var(--shadow-card);transform:translateY(-8px);opacity:0;visibility:hidden;transition:.25s}
+  nav.main.open{transform:none;opacity:1;visibility:visible}
+  nav.main ul{flex-direction:column;padding:var(--space-4)}
+  nav.main a{padding:14px 12px}
+}
+@media(min-width:1024px){.menu-toggle{display:none}.header-cta{display:inline-flex}}
+
+/* ===== Hero slider ===== */
+.hero{position:relative;height:clamp(520px,82vh,720px);overflow:hidden;background:#13263b;color:#fff;isolation:isolate}
+.slide{position:absolute;inset:0;opacity:0;visibility:hidden;transition:opacity 1.1s ease,visibility 0s linear 1.1s}
+.slide.is-active{opacity:1;visibility:visible;transition:opacity 1.1s ease,visibility 0s}
+.slide .bg{position:absolute;inset:-2%;background-size:cover;background-position:center;background-color:#1d4e89;transform:scale(1.12) translate3d(0,0,0);will-change:transform}
+.slide.is-active .bg{animation:kenburns 9s ease-out forwards}
+.slide:nth-child(even).is-active .bg{animation-name:kenburns-alt}
+@keyframes kenburns{from{transform:scale(1.14) translate3d(-1.5%,1%,0)}to{transform:scale(1.02) translate3d(0,0,0)}}
+@keyframes kenburns-alt{from{transform:scale(1.02) translate3d(1%,0,0)}to{transform:scale(1.14) translate3d(-1%,-1%,0)}}
+.slide::after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,rgba(13,23,36,.86) 0%,rgba(13,23,36,.62) 45%,rgba(13,23,36,.15) 100%),linear-gradient(0deg,rgba(13,23,36,.55),transparent 40%)}
+.slide .content{position:relative;z-index:2;height:100%;display:flex;flex-direction:column;justify-content:center;max-width:var(--wrap);margin:0 auto;padding:0 var(--space-4) 64px}
+@media(min-width:768px){.slide .content{padding:0 var(--space-6) 64px}}
+.slide .kicker,.slide h1,.slide .sub,.slide .actions{opacity:0;transform:translateY(24px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.slide.is-active .kicker,.slide.is-active h1,.slide.is-active .sub,.slide.is-active .actions{opacity:1;transform:none}
+.slide.is-active .kicker{transition-delay:.35s}
+.slide.is-active h1{transition-delay:.5s}
+.slide.is-active .sub{transition-delay:.68s}
+.slide.is-active .actions{transition-delay:.85s}
+.slide .kicker{display:inline-flex;align-self:flex-start;align-items:center;gap:var(--space-2);padding:6px 12px;border-radius:var(--radius-pill);background:rgba(255,255,255,.14);backdrop-filter:blur(6px);font-size:13px;font-weight:600;margin-bottom:var(--space-4)}
+.slide .kicker i{width:8px;height:8px;border-radius:var(--radius-pill);background:#4cc3b8}
+.slide h1{font-size:clamp(34px,6vw,56px);line-height:1.08;font-weight:700;max-width:720px}
+.slide h1 em{font-style:normal;color:#9cc7f5}
+.slide .sub{font-size:clamp(16px,2vw,19px);line-height:1.5;max-width:560px;margin-top:var(--space-4);color:rgba(255,255,255,.88)}
+.slide .actions{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-6)}
+.hero-ui{position:absolute;z-index:5;left:0;right:0;bottom:var(--space-6)}
+.hero-ui .wrap{display:flex;align-items:center;justify-content:space-between;gap:var(--space-4)}
+.dots{display:flex;gap:var(--space-2);flex:1;max-width:520px}
+.dot{position:relative;flex:1;height:44px;border:0;background:transparent;cursor:pointer;padding:0;color:#fff;text-align:left}
+.dot span.track{position:absolute;left:0;right:0;top:20px;height:3px;border-radius:var(--radius-pill);background:rgba(255,255,255,.3);overflow:hidden}
+.dot span.fill{position:absolute;inset:0;background:#fff;transform:scaleX(0);transform-origin:left}
+.dot.is-done span.fill{transform:scaleX(1)}
+.dot.is-active span.fill{animation:fill var(--dur,7s) linear forwards}
+.hero.paused .dot.is-active span.fill{animation-play-state:paused}
+@keyframes fill{to{transform:scaleX(1)}}
+.dot .lbl{position:absolute;top:0;font-size:12px;font-weight:600;opacity:.75;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%}
+.dot.is-active .lbl{opacity:1}
+@media(max-width:600px){.dot .lbl{display:none}}
+.arrows{display:flex;gap:var(--space-2)}
+.arrow{width:44px;height:44px;border-radius:var(--radius-pill);border:1.5px solid rgba(255,255,255,.6);background:rgba(13,23,36,.3);color:#fff;cursor:pointer;display:grid;place-items:center;transition:background .2s}
+.arrow:hover{background:rgba(255,255,255,.18)}
+
+/* Trust strip */
+.trust{background:var(--surface-raised);border-bottom:1px solid var(--border)}
+.trust .wrap{display:grid;grid-template-columns:repeat(2,1fr);gap:var(--space-4);padding-top:var(--space-6);padding-bottom:var(--space-6)}
+@media(min-width:900px){.trust .wrap{grid-template-columns:repeat(4,1fr)}}
+.trust .item{display:flex;gap:var(--space-2);align-items:flex-start}
+.trust strong{display:block;font-size:20px;line-height:28px;color:var(--brand)}
+.trust span{font-size:14px;line-height:20px;color:var(--ink-muted)}
+
+/* Cards */
+.grid{display:grid;gap:var(--space-4)}
+@media(min-width:700px){.grid.cols-2{grid-template-columns:repeat(2,1fr)}.grid.cols-4{grid-template-columns:repeat(2,1fr)}}
+@media(min-width:1024px){.grid.cols-4{grid-template-columns:repeat(4,1fr)}.grid.cols-3{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:700px) and (max-width:1023px){.grid.cols-3{grid-template-columns:repeat(2,1fr)}}
+.card{background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-md);box-shadow:var(--shadow-card);overflow:hidden;display:flex;flex-direction:column;transition:transform .3s ease,box-shadow .3s ease}
+.card:hover{transform:translateY(-3px);box-shadow:0 2px 4px rgba(19,38,59,.08),0 12px 28px rgba(19,38,59,.12)}
+.card .media{aspect-ratio:16/10;background:var(--brand-soft);overflow:hidden}
+.card .media img{width:100%;height:100%;object-fit:cover;transition:transform .6s ease}
+.card:hover .media img{transform:scale(1.05)}
+.card .body{padding:var(--space-4) var(--space-4) var(--space-6);display:flex;flex-direction:column;gap:var(--space-2);flex:1}
+@media(min-width:768px){.card .body{padding:var(--space-6)}}
+.card p{color:var(--ink-muted);font-size:15px;line-height:22px}
+.card .foot{margin-top:auto;padding-top:var(--space-4);display:flex;align-items:center;justify-content:space-between;gap:var(--space-2);flex-wrap:wrap}
+.price{font-weight:700;font-size:18px}
+.price small{display:block;font-size:12px;font-weight:500;color:var(--ink-muted);line-height:16px}
+.chips{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-6)}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:8px 12px;border-radius:var(--radius-pill);background:var(--route-soft);color:var(--ink);font-size:14px;font-weight:500;text-decoration:none;border:1px solid transparent}
+.chip:hover{border-color:var(--route);color:var(--ink)}
+.chip::before{content:"";width:6px;height:6px;border-radius:var(--radius-pill);background:var(--route)}
+
+/* Barrios privados */
+#barrios{background:var(--surface-raised);border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.barrios-grid{display:grid;gap:var(--space-8)}
+@media(min-width:1024px){.barrios-grid{grid-template-columns:1.05fr 1fr;align-items:start}}
+.steps{list-style:none;margin:var(--space-6) 0 0;padding:0;position:relative}
+.steps::before{content:"";position:absolute;left:15px;top:16px;bottom:16px;width:2px;background:var(--route);opacity:.35}
+.steps li{position:relative;display:grid;grid-template-columns:32px 1fr;gap:var(--space-4);padding-bottom:var(--space-6)}
+.steps li:last-child{padding-bottom:0}
+.steps .n{width:32px;height:32px;border-radius:var(--radius-pill);background:var(--route);color:var(--on-brand);display:grid;place-items:center;font-weight:700;font-size:14px;position:relative}
+.steps h3{font-size:17px;line-height:24px}
+.steps p{color:var(--ink-muted);font-size:15px;line-height:22px;margin-top:2px}
+.panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius-md);padding:var(--space-6);box-shadow:var(--shadow-card)}
+.panel h3{margin-bottom:var(--space-1)}
+.panel .hint{color:var(--ink-muted);font-size:14px;line-height:20px}
+.field{display:flex;flex-direction:column;gap:6px;margin-top:var(--space-4)}
+.field label{font-size:13px;line-height:16px;font-weight:600}
+.field input,.field select{min-height:44px;padding:10px 12px;border-radius:var(--radius-sm);border:1.5px solid var(--border-strong);background:var(--surface-raised);color:var(--ink);font:500 15px/20px var(--font-sans)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:var(--space-4)}
+.segmented{display:flex;border:1.5px solid var(--border-strong);border-radius:var(--radius-sm);overflow:hidden;margin-top:6px}
+.segmented button{flex:1;min-height:42px;border:0;background:transparent;color:var(--ink);font:600 14px var(--font-sans);cursor:pointer}
+.segmented button[aria-pressed="true"]{background:var(--brand);color:var(--on-brand)}
+.window{margin-top:var(--space-6);border-radius:var(--radius-md);padding:var(--space-4);border:1px solid var(--border);background:var(--surface-raised)}
+.window .status{display:flex;align-items:center;gap:var(--space-2);font-weight:700}
+.window .status i{width:10px;height:10px;border-radius:var(--radius-pill);background:var(--border-strong)}
+.window[data-state="open"] .status{color:var(--success)}
+.window[data-state="open"] .status i{background:var(--success);box-shadow:0 0 0 0 rgba(30,117,56,.5);animation:pulse 1.8s infinite}
+.window[data-state="soon"] .status{color:var(--warning)}
+.window[data-state="soon"] .status i{background:var(--warning)}
+.window[data-state="closed"] .status{color:var(--danger)}
+.window[data-state="closed"] .status i{background:var(--danger)}
+@keyframes pulse{70%{box-shadow:0 0 0 10px rgba(30,117,56,0)}100%{box-shadow:0 0 0 0 rgba(30,117,56,0)}}
+.window .detail{color:var(--ink-muted);font-size:14px;line-height:20px;margin-top:var(--space-1)}
+.timeline{position:relative;height:28px;margin-top:var(--space-4)}
+.timeline .bar{position:absolute;left:0;right:0;top:12px;height:4px;border-radius:var(--radius-pill);background:var(--border)}
+.timeline .open{position:absolute;top:12px;height:4px;border-radius:var(--radius-pill);background:var(--route)}
+.timeline .now{position:absolute;top:4px;width:2px;height:20px;background:var(--ink);transition:left .4s}
+.timeline-labels{display:flex;justify-content:space-between;font-size:12px;line-height:16px;color:var(--ink-muted)}
+.panel .actions{display:flex;flex-wrap:wrap;gap:var(--space-2);margin-top:var(--space-4)}
+.rules{display:grid;gap:var(--space-2);margin-top:var(--space-6)}
+@media(min-width:600px){.rules{grid-template-columns:repeat(3,1fr)}}
+.rule{background:var(--brand-soft);border-radius:var(--radius-md);padding:var(--space-4)}
+.rule strong{display:block;font-size:20px;line-height:28px;color:var(--ink)}
+.rule span{font-size:14px;line-height:20px;color:var(--ink)}
+
+/* Tracking */
+.track{display:grid;gap:var(--space-8);align-items:center}
+@media(min-width:900px){.track{grid-template-columns:1fr 1fr}}
+.route-visual{position:relative;background:var(--brand-strong);border-radius:var(--radius-md);padding:var(--space-8) var(--space-6);color:#fff;overflow:hidden;min-height:240px}
+.route-visual svg{width:100%;height:auto}
+.route-visual .stopline{stroke:rgba(255,255,255,.35);stroke-width:4;fill:none;stroke-linecap:round}
+.route-visual .progress{stroke:#4cc3b8;stroke-width:4;fill:none;stroke-linecap:round;stroke-dasharray:1000;stroke-dashoffset:1000;animation:draw 6s ease-in-out infinite}
+@keyframes draw{0%{stroke-dashoffset:1000}70%,100%{stroke-dashoffset:0}}
+.route-visual .stop{fill:#13375f;stroke:#fff;stroke-width:3}
+.route-visual text{fill:#fff;font:600 12px var(--font-sans)}
+.route-visual .van{offset-path:path("M30 150 C 120 150, 140 60, 230 60 S 340 130, 430 90");animation:drive 6s ease-in-out infinite}
+@keyframes drive{0%{offset-distance:0%}70%,100%{offset-distance:100%}}
+
+/* Paneles */
+.access .card .body{gap:var(--space-2)}
+.access .icon{width:44px;height:44px;border-radius:var(--radius-md);background:var(--brand-soft);color:var(--brand);display:grid;place-items:center}
+.tag{display:inline-block;padding:2px 10px;border-radius:var(--radius-pill);background:var(--route-soft);color:var(--ink);font-size:12px;line-height:20px;font-weight:600}
+
+/* Empresa / Zonamerica band */
+.band{background:var(--brand);color:var(--on-brand)}
+.band .wrap{display:grid;gap:var(--space-6);align-items:center}
+@media(min-width:900px){.band .wrap{grid-template-columns:1.4fr 1fr}}
+.band h2{color:inherit}
+.band p{opacity:.9;margin-top:var(--space-2)}
+.band .actions{display:flex;flex-wrap:wrap;gap:var(--space-2);justify-content:flex-start}
+@media(min-width:900px){.band .actions{justify-content:flex-end}}
+
+/* Contact & footer */
+.contact-grid{display:grid;gap:var(--space-4)}
+@media(min-width:800px){.contact-grid{grid-template-columns:repeat(3,1fr)}}
+.contact-card{display:flex;flex-direction:column;gap:var(--space-2);padding:var(--space-6);background:var(--surface-raised);border:1px solid var(--border);border-radius:var(--radius-md)}
+.contact-card .num{font-size:20px;font-weight:700;color:var(--ink)}
+.newsletter form{display:flex;gap:var(--space-2);flex-wrap:wrap;margin-top:var(--space-2)}
+.newsletter input{flex:1 1 180px;min-height:44px;padding:10px 12px;border-radius:var(--radius-sm);border:1.5px solid var(--border-strong);background:var(--surface);color:var(--ink);font:500 15px var(--font-sans)}
+.newsletter .msg{font-size:14px;color:var(--success);min-height:20px}
+footer{background:#0d1724;color:#c5d1de;padding:var(--space-12) 0 var(--space-6);font-size:14px;line-height:20px}
+footer a{color:#e2ecf7;text-decoration:none}
+footer a:hover{text-decoration:underline;color:#fff}
+footer .cols{display:grid;gap:var(--space-8)}
+@media(min-width:800px){footer .cols{grid-template-columns:1.3fr 1fr 1fr 1fr}}
+footer h4{margin:0 0 var(--space-2);color:#fff;font-size:14px}
+footer ul{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+footer .legal{border-top:1px solid #2a3a4c;margin-top:var(--space-8);padding-top:var(--space-6);display:flex;flex-wrap:wrap;gap:var(--space-4);justify-content:space-between;align-items:center}
+footer .flogo{height:44px;width:auto;margin-bottom:var(--space-4)}
+footer .wordmark{font-weight:700;letter-spacing:.04em;font-size:22px;color:#fff;margin-bottom:var(--space-4)}
+
+/* Floating WhatsApp */
+.wa-float{position:fixed;right:16px;bottom:16px;z-index:60;display:flex;align-items:center;gap:var(--space-2);padding:12px 16px 12px 12px;border-radius:var(--radius-pill);background:#1f8f4c;color:#fff;text-decoration:none;font-weight:600;box-shadow:0 6px 20px rgba(0,0,0,.25);transform:translateY(120%);transition:transform .35s cubic-bezier(.2,.7,.2,1)}
+.wa-float.show{transform:none}
+.wa-float:hover{background:#18763e;color:#fff}
+.wa-float svg{width:28px;height:28px}
+@media(max-width:480px){.wa-float .t{display:none}.wa-float{padding:12px}}
+
+/* Reveal on scroll */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .7s ease,transform .7s cubic-bezier(.2,.7,.2,1)}
+.reveal.in{opacity:1;transform:none}
+
+@media (prefers-reduced-motion: reduce){
+  *,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}
+  .reveal{opacity:1;transform:none}
+  .slide .kicker,.slide h1,.slide .sub,.slide .actions{opacity:1;transform:none}
+}
+</style>
+</head>
+<body>
+
+<!-- SVG icon sprite -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <symbol id="i-wa" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8s-.4-.1-.6.1-.7.8-.8 1-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.3a.5.5 0 0 0 0-.5l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 3 3 0 0 0-.9 2.2 5.2 5.2 0 0 0 1.1 2.7 11.8 11.8 0 0 0 4.5 4c1.7.7 2.3.8 3.2.6a2.7 2.7 0 0 0 1.8-1.2 2.2 2.2 0 0 0 .1-1.3c0-.1-.2-.2-.5-.3Z"/></symbol>
+  <symbol id="i-arrow" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M13 6l6 6-6 6"/></symbol>
+  <symbol id="i-left" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 6l-6 6 6 6"/></symbol>
+  <symbol id="i-right" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 6l6 6-6 6"/></symbol>
+  <symbol id="i-menu" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M4 7h16M4 12h16M4 17h16"/></symbol>
+  <symbol id="i-pin" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21Z"/><circle cx="12" cy="9.5" r="2.5" fill="none" stroke="currentColor" stroke-width="1.8"/></symbol>
+  <symbol id="i-home" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 11l8-6 8 6v8a1 1 0 0 1-1 1h-4v-5h-6v5H5a1 1 0 0 1-1-1z"/></symbol>
+  <symbol id="i-grid" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></g></symbol>
+  <symbol id="i-van" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"><path d="M3 16V8a2 2 0 0 1 2-2h10l5 5v5h-2M3 16h2m4 0h6"/><circle cx="7" cy="16.5" r="2"/><circle cx="16" cy="16.5" r="2"/><path d="M14 6v5h6"/></g></symbol>
+  <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 5h16v11H9l-5 4z"/></symbol>
+</svg>
+
+<div class="topbar">
+  <div class="wrap">
+    <div class="langs" aria-label="Idioma">
+      <a href="#" aria-current="true">ES</a><a href="#" data-lang="en">EN</a><a href="#" data-lang="pt">PT</a>
+    </div>
+    <div class="contact">
+      <a href="#" data-wa="general">WhatsApp +598 98 502 880</a>
+      <a href="#" data-wa="empresas">Empresas y eventos +598 98 485 990</a>
+    </div>
+  </div>
+</div>
+
+<header class="site">
+  <div class="wrap">
+    <a class="logo" href="#inicio" aria-label="Survans, inicio">
+      <img src="https://www.survans.com.uy/Themes/Element/Content/img/logo.svg" alt="SURVANS" onerror="this.replaceWith(Object.assign(document.createElement('span'),{className:'wordmark',textContent:'SURVANS'}))">
+    </a>
+    <nav class="main" id="nav" aria-label="Principal">
+      <ul>
+        <li><a href="#servicios">Transfers</a></li>
+        <li><a href="#personal">Traslado de personal</a></li>
+        <li><a href="#barrios">Barrios privados</a></li>
+        <li><a href="#seguimiento">Seguí tu van</a></li>
+        <li><a href="#tours">Tours</a></li>
+        <li><a href="#accesos">Accesos</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+      </ul>
+    </nav>
+    <a class="btn btn-primary header-cta" href="#" data-wa="general"><svg class="ico"><use href="#i-wa"/></svg>Reservar</a>
+    <button class="menu-toggle" aria-controls="nav" aria-expanded="false"><span class="sr-only">Menú</span><svg class="ico"><use href="#i-menu"/></svg></button>
+  </div>
+</header>
+
+<main id="inicio">
+<!-- ===== HERO ===== -->
+<section class="hero" aria-roledescription="carrusel" aria-label="Destacados" style="padding:0">
+  <div class="slides">
+    <article class="slide is-active" aria-roledescription="diapositiva" aria-label="1 de 4">
+      <div class="bg" style="background-image:url('https://www.survans.com.uy/content/images/thumbs/0000291.jpeg')"></div>
+      <div class="content">
+        <span class="kicker"><i></i>Más de 20 años en Uruguay</span>
+        <h1>Traslado de personal <em>puntual y seguro</em></h1>
+        <p class="sub">Líderes en traslado de personal en la zona de Zonamerica. Rutas fijas, paradas claras y choferes profesionales para empresas, instituciones y barrios.</p>
+        <div class="actions">
+          <a class="btn btn-light" href="#personal">Conozca ventajas y beneficios<svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-outline-light" href="#" data-wa="empresas" data-msg="Hola Survans, quiero cotizar traslado de personal para mi empresa.">Cotizar por WhatsApp</a>
+        </div>
+      </div>
+    </article>
+    <article class="slide" aria-roledescription="diapositiva" aria-label="2 de 4">
+      <div class="bg" style="background-image:url('https://www.survans.com.uy/content/images/thumbs/0000297_traslado-de-personal.jpeg')"></div>
+      <div class="content">
+        <span class="kicker"><i></i>Nuevo · Reservas por WhatsApp</span>
+        <h1>Tu lugar en la van del barrio, <em>en un mensaje</em></h1>
+        <p class="sub">Registrate una vez, reservá por WhatsApp con nuestro asistente y recibí la confirmación al instante. Sin apps que descargar.</p>
+        <div class="actions">
+          <a class="btn btn-light" href="#barrios">Cómo funciona<svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-outline-light" href="#" data-wa="reservas" data-msg="Hola, quiero reservar un lugar en la van de mi barrio.">Reservar ahora</a>
+        </div>
+      </div>
+    </article>
+    <article class="slide" aria-roledescription="diapositiva" aria-label="3 de 4">
+      <div class="bg" style="background-image:url('https://www.survans.com.uy/content/images/thumbs/0000140_transfer-desde-y-hacia-el-aeropuerto.jpeg')"></div>
+      <div class="content">
+        <span class="kicker"><i></i>Desde U$S 38</span>
+        <h1>Transfer al <em>Aeropuerto de Carrasco</em></h1>
+        <p class="sub">Te buscamos a la hora que te quede cómoda y te llevamos a tiempo. También Puerto de Montevideo, Colonia y Punta del Este.</p>
+        <div class="actions">
+          <a class="btn btn-light" href="#servicios">Ver transfers<svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-outline-light" href="#" data-wa="general" data-msg="Hola Survans, quiero reservar un transfer al aeropuerto.">Reservar transfer</a>
+        </div>
+      </div>
+    </article>
+    <article class="slide" aria-roledescription="diapositiva" aria-label="4 de 4">
+      <div class="bg" style="background-image:url('https://www.survans.com.uy/content/images/thumbs/0000120_full-day-punta-del-este_375.jpeg')"></div>
+      <div class="content">
+        <span class="kicker"><i></i>Viajes y turismo</span>
+        <h1>Full days a <em>Punta, Colonia y José Ignacio</em></h1>
+        <p class="sub">Tours guiados en vehículos modernos, con salida desde Montevideo.</p>
+        <div class="actions">
+          <a class="btn btn-light" href="#tours">Ver tours<svg class="ico"><use href="#i-arrow"/></svg></a>
+          <a class="btn btn-outline-light" href="#" data-wa="general" data-msg="Hola Survans, quiero información sobre los tours.">Consultar</a>
+        </div>
+      </div>
+    </article>
+  </div>
+  <div class="hero-ui">
+    <div class="wrap">
+      <div class="dots" role="tablist" aria-label="Elegir diapositiva"></div>
+      <div class="arrows">
+        <button class="arrow" data-dir="-1" aria-label="Anterior"><svg class="ico"><use href="#i-left"/></svg></button>
+        <button class="arrow" data-dir="1" aria-label="Siguiente"><svg class="ico"><use href="#i-right"/></svg></button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="trust">
+  <div class="wrap">
+    <div class="item"><div><strong>+20 años</strong><span>trasladando pasajeros en Uruguay</span></div></div>
+    <div class="item"><div><strong>Zonamerica</strong><span>primera empresa de transfers de pasajeros</span></div></div>
+    <div class="item"><div><strong>Barrios privados</strong><span>La Tahona, Barrios del Polo y más</span></div></div>
+    <div class="item"><div><strong>WhatsApp</strong><span>reservas y seguimiento en un mensaje</span></div></div>
+  </div>
+</div>
+
+<!-- ===== SERVICIOS ===== -->
+<section id="servicios">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Servicios</span>
+      <h2>Transfers y traslado de pasajeros en Uruguay</h2>
+      <p class="lead">Más de 20 años en el rubro. Elegí el servicio y reservá directo por WhatsApp.</p>
+    </div>
+    <div class="grid cols-4">
+      <article class="card reveal">
+        <div class="media"><img loading="lazy" src="https://www.survans.com.uy/content/images/thumbs/0000140_transfer-desde-y-hacia-el-aeropuerto_560.jpeg" alt="Van de Survans en el aeropuerto"></div>
+        <div class="body">
+          <h3>Transfer aeropuerto</h3>
+          <p>Traslados personalizados desde y hacia el Aeropuerto de Carrasco, con recogida a la hora que te quede cómoda.</p>
+          <div class="foot"><div class="price"><small>Desde</small>U$S 38</div><a class="btn btn-primary" href="#" data-wa="general" data-msg="Hola Survans, quiero reservar un transfer desde/hacia el aeropuerto.">Reservar</a></div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="media"><img loading="lazy" src="https://www.survans.com.uy/content/images/thumbs/0000297_traslado-de-personal_560.jpeg" alt="Traslado de personal en van"></div>
+        <div class="body">
+          <h3>Traslado de personal</h3>
+          <p>Para empresas, instituciones y emprendimientos habitacionales. Rutas fijas con paradas en el recorrido.</p>
+          <div class="foot"><div class="price"><small>Precio</small>Consultar</div><a class="btn btn-primary" href="#" data-wa="empresas" data-msg="Hola Survans, quiero cotizar traslado de personal.">Cotizar</a></div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="media"><img loading="lazy" src="https://www.survans.com.uy/content/images/thumbs/0000124_transfer-a-eventos_560.jpeg" alt="Transfer a eventos"></div>
+        <div class="body">
+          <h3>Transfer a eventos</h3>
+          <p>Salidas grupales e individuales a casamientos, congresos, conciertos y eventos corporativos.</p>
+          <div class="foot"><div class="price"><small>Precio</small>Consultar</div><a class="btn btn-primary" href="#" data-wa="empresas" data-msg="Hola Survans, quiero cotizar un transfer para un evento.">Cotizar</a></div>
+        </div>
+      </article>
+      <article class="card reveal">
+        <div class="media"><img loading="lazy" src="https://www.survans.com.uy/content/images/thumbs/0000291.jpeg" alt="Transfers Zonamerica"></div>
+        <div class="body">
+          <h3>Transfers Zonamerica</h3>
+          <p>Fuimos la primera empresa de traslado de pasajeros de Zonamerica. Horarios fijos para quienes trabajan en el parque.</p>
+          <div class="foot"><div class="price"><small>Precio</small>Consultar</div><a class="btn btn-primary" href="#" data-wa="empresas" data-msg="Hola Survans, quiero información sobre los transfers a Zonamerica.">Consultar</a></div>
+        </div>
+      </article>
+    </div>
+    <div class="chips reveal" aria-label="Otros transfers">
+      <a class="chip" href="#" data-wa="general" data-msg="Hola Survans, quiero un transfer al Aeropuerto de Carrasco.">Aeropuerto de Carrasco</a>
+      <a class="chip" href="#" data-wa="general" data-msg="Hola Survans, quiero un transfer al Puerto de Montevideo.">Puerto de Montevideo</a>
+      <a class="chip" href="#" data-wa="general" data-msg="Hola Survans, quiero un transfer a Colonia desde Montevideo.">Colonia desde Montevideo</a>
+      <a class="chip" href="#" data-wa="general" data-msg="Hola Survans, quiero un transfer a Punta del Este desde Montevideo.">Punta del Este desde Montevideo</a>
+      <a class="chip" href="#" data-wa="empresas" data-msg="Hola Survans, quiero un transfer para un evento.">Eventos</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== PERSONAL / EMPRESAS ===== -->
+<section class="band" id="personal">
+  <div class="wrap">
+    <div class="reveal">
+      <h2>Traslado de personal para empresas y barrios</h2>
+      <p>Diseñamos el recorrido con paradas según los turnos de tu equipo, con choferes y camionetas asignados y seguimiento GPS de cada viaje. Más de 20 años liderando el traslado de personal en la zona de Zonamerica.</p>
+    </div>
+    <div class="actions reveal">
+      <a class="btn btn-light" href="#" data-wa="empresas" data-msg="Hola Survans, quiero cotizar traslado de personal para mi empresa.">Cotizar para mi empresa</a>
+      <a class="btn btn-outline-light" href="#barrios">Soy de un barrio privado</a>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BARRIOS PRIVADOS ===== -->
+<section id="barrios">
+  <div class="wrap barrios-grid">
+    <div class="reveal">
+      <span class="eyebrow">Barrios privados</span>
+      <h2>Reservá tu viaje por WhatsApp</h2>
+      <p class="lead">Rutas fijas de ida y vuelta para el personal de las casas y los invitados de La Tahona, Barrios del Polo y otros barrios. Las vans paran en las paradas del recorrido; no hacen puerta a puerta.</p>
+      <ol class="steps">
+        <li><span class="n">1</span><div><h3>Registrate una vez</h3><p>Escribinos por WhatsApp y el asistente te pide tus datos. El barrio autoriza tu registro y queda listo.</p></div></li>
+        <li><span class="n">2</span><div><h3>Reservá tu lugar</h3><p>Elegí horario y parada. Las reservas abren 24 h antes de la salida y cierran 15 min antes.</p></div></li>
+        <li><span class="n">3</span><div><h3>Seguí tu van</h3><p>Pedí el enlace de seguimiento y mirá en el mapa por dónde viene tu van.</p></div></li>
+        <li><span class="n">4</span><div><h3>¿Venís de invitado?</h3><p>El propietario o inquilino te autoriza para un viaje puntual, en un día y horario concretos.</p></div></li>
+      </ol>
+      <div class="rules">
+        <div class="rule"><strong>24 h</strong><span>antes de la salida abre la reserva</span></div>
+        <div class="rule"><strong>15 min</strong><span>antes de la salida cierra la reserva</span></div>
+        <div class="rule"><strong>0 apps</strong><span>todo pasa en WhatsApp</span></div>
+      </div>
+    </div>
+
+    <div class="panel reveal" id="booking" aria-labelledby="booking-title">
+      <h3 id="booking-title">¿Ya puedo reservar?</h3>
+      <p class="hint">Elegí la salida y te decimos si la reserva está abierta.</p>
+      <div class="field">
+        <label for="barrio">Barrio</label>
+        <select id="barrio">
+          <option>La Tahona</option>
+          <option>Barrios del Polo</option>
+          <option>Portones de Carrasco</option>
+          <option value="Otro">Otro barrio</option>
+        </select>
+      </div>
+      <div class="field">
+        <span id="dir-lbl" style="font-size:13px;font-weight:600">Sentido</span>
+        <div class="segmented" role="group" aria-labelledby="dir-lbl">
+          <button type="button" aria-pressed="true" data-dir="Ida">Ida</button>
+          <button type="button" aria-pressed="false" data-dir="Vuelta">Vuelta</button>
+        </div>
+      </div>
+      <div class="row">
+        <div class="field"><label for="dep-date">Día</label><input type="date" id="dep-date"></div>
+        <div class="field"><label for="dep-time">Hora de salida</label><input type="time" id="dep-time" value="07:15" step="300"></div>
+      </div>
+      <div class="window" id="window" data-state="closed" aria-live="polite">
+        <div class="status"><i></i><span id="w-status">—</span></div>
+        <p class="detail" id="w-detail"></p>
+        <div class="timeline" aria-hidden="true"><div class="bar"></div><div class="open" id="w-open"></div><div class="now" id="w-now"></div></div>
+        <div class="timeline-labels" aria-hidden="true"><span id="w-l1"></span><span id="w-l2"></span></div>
+      </div>
+      <div class="actions">
+        <a class="btn btn-route" id="w-book" href="#"><svg class="ico"><use href="#i-wa"/></svg>Reservar por WhatsApp</a>
+        <a class="btn btn-ghost" href="#" data-wa="reservas" data-msg="Hola, quiero registrarme para viajar en la van de mi barrio.">Registrarme</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== SEGUIMIENTO ===== -->
+<section id="seguimiento">
+  <div class="wrap track">
+    <div class="reveal">
+      <span class="eyebrow">Seguimiento GPS</span>
+      <h2>Seguí tu van en tiempo real</h2>
+      <p class="lead">Todas nuestras camionetas tienen GPS. Pedí el enlace de seguimiento por WhatsApp y abrilo en el celular: vas a ver por dónde viene la van y cuánto falta para tu parada.</p>
+      <div class="actions" style="display:flex;flex-wrap:wrap;gap:8px;margin-top:24px">
+        <a class="btn btn-route" href="#" data-wa="reservas" data-msg="Hola, quiero el enlace de seguimiento de mi van."><svg class="ico"><use href="#i-pin"/></svg>Pedir enlace de seguimiento</a>
+      </div>
+    </div>
+    <div class="route-visual reveal" aria-hidden="true">
+      <svg viewBox="0 0 460 210">
+        <path class="stopline" d="M30 150 C 120 150, 140 60, 230 60 S 340 130, 430 90"/>
+        <path class="progress" pathLength="1000" d="M30 150 C 120 150, 140 60, 230 60 S 340 130, 430 90"/>
+        <circle class="stop" cx="30" cy="150" r="8"/><text x="18" y="180">Salida</text>
+        <circle class="stop" cx="230" cy="60" r="8"/><text x="205" y="40">Parada 2</text>
+        <circle class="stop" cx="430" cy="90" r="8"/><text x="400" y="122">Portería</text>
+        <g class="van"><circle r="13" fill="#4cc3b8"/><circle r="5" fill="#13375f"/></g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ===== TOURS ===== -->
+<section id="tours" style="background:var(--surface-raised);border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Viajes y turismo</span>
+      <h2>Tours y full days</h2>
+      <p class="lead">Recorridos guiados en vehículos modernos, con salida desde Montevideo.</p>
+    </div>
+    <div class="grid cols-4">
+      <article class="card reveal">
+        <div class="media"><img loading="lazy" src="https://www.survans.com.uy/content/images/thumbs/0000120_full-day-punta-del-este_375.jpeg" alt="Punta del Este"></div>
+        <div class="body"><h3>Full Day Punta del Este</h3><p>Un destino único: lujo, gastronomía, paisajes y eventos.</p>
+          <div class="foot"><div class="price">U$S 250</div><a class="btn btn-primary" href="#" data-wa="general" data-msg="Hola Survans, quiero reservar el Full Day Punta del Este.">Reservar</a></div></div>
+      </article>
+      <article class="card reveal">
+        <div class="media"><img loading="lazy" src="https://www.survans.com.uy/content/images/thumbs/0000121_city-tour-montevideo_375.jpeg" alt="Montevideo"></div>
+        <div class="body"><h3>City Tour Montevideo</h3><p>Recorrido guiado por la ciudad en vehículo moderno.</p>
+          <div class="foot"><div class="price">U$S 120</div><a class="btn btn-primary" href="#" data-wa="general" data-msg="Hola Survans, quiero reservar el City Tour Montevideo.">Reservar</a></div></div>
+      </article>
+      <article class="card reveal">
+        <div class="media"><img loading="lazy" src="https://www.survans.com.uy/content/images/thumbs/0000122_full-day-colonia_375.jpeg" alt="Colonia del Sacramento"></div>
+        <div class="body"><h3>Full Day Colonia</h3><p>El barrio histórico de Colonia del Sacramento, Patrimonio de la Humanidad (UNESCO) desde 1995.</p>
+          <div class="foot"><div class="price">U$S 300</div><a class="btn btn-primary" href="#" data-wa="general" data-msg="Hola Survans, quiero reservar el Full Day Colonia.">Reservar</a></div></div>
+      </article>
+      <article class="card reveal">
+        <div class="media"><img loading="lazy" src="https://www.survans.com.uy/content/images/thumbs/0000146_full-day-jose-ignacio_375.jpeg" alt="José Ignacio"></div>
+        <div class="body"><h3>Full Day José Ignacio</h3><p>Un paseo recomendado por sus calles y alrededores.</p>
+          <div class="foot"><div class="price">U$S 300</div><a class="btn btn-primary" href="#" data-wa="general" data-msg="Hola Survans, quiero reservar el Full Day José Ignacio.">Reservar</a></div></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== ACCESOS ===== -->
+<section id="accesos" class="access">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Accesos</span>
+      <h2>Paneles de gestión</h2>
+      <p class="lead">Accesos para barrios, la administración de Survans y los choferes.</p>
+    </div>
+    <div class="grid cols-3">
+      <article class="card reveal"><div class="body">
+        <div class="icon"><svg class="ico"><use href="#i-home"/></svg></div>
+        <h3>Administración del barrio</h3>
+        <p>Autorizar personal e invitados, ver reservas y viajes del barrio, exportar datos para cobros.</p>
+        <div class="foot"><span class="tag">Próximamente</span><a class="btn btn-ghost" href="#" data-panel="barrio">Ingresar</a></div>
+      </div></article>
+      <article class="card reveal"><div class="body">
+        <div class="icon"><svg class="ico"><use href="#i-grid"/></svg></div>
+        <h3>Administración general</h3>
+        <p>Horarios, días sin servicio, asignación de choferes y camionetas, centro de comunicación.</p>
+        <div class="foot"><span class="tag">Próximamente</span><a class="btn btn-ghost" href="#" data-panel="general">Ingresar</a></div>
+      </div></article>
+      <article class="card reveal"><div class="body">
+        <div class="icon"><svg class="ico"><use href="#i-van"/></svg></div>
+        <h3>Choferes</h3>
+        <p>Recorrido del día, lista de pasajeros por parada y GPS de la camioneta asignada.</p>
+        <div class="foot"><span class="tag">Próximamente</span><a class="btn btn-ghost" href="#" data-panel="choferes">Ingresar</a></div>
+      </div></article>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CONTACTO ===== -->
+<section id="contacto" style="background:var(--surface-raised);border-top:1px solid var(--border)">
+  <div class="wrap">
+    <div class="section-head reveal">
+      <span class="eyebrow">Contacto</span>
+      <h2>Hablemos</h2>
+    </div>
+    <div class="contact-grid">
+      <div class="contact-card reveal">
+        <span class="eyebrow">General y reservas</span>
+        <span class="num">+598 98 502 880</span>
+        <p class="hint" style="color:var(--ink-muted)">Transfers, aeropuerto y tours.</p>
+        <a class="btn btn-primary" href="#" data-wa="general" style="margin-top:auto"><svg class="ico"><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
+      </div>
+      <div class="contact-card reveal">
+        <span class="eyebrow">Empresas y eventos</span>
+        <span class="num">+598 98 485 990</span>
+        <p class="hint" style="color:var(--ink-muted)">Traslado de personal, Zonamerica y eventos.</p>
+        <a class="btn btn-primary" href="#" data-wa="empresas" style="margin-top:auto"><svg class="ico"><use href="#i-wa"/></svg>Escribir por WhatsApp</a>
+      </div>
+      <div class="contact-card newsletter reveal">
+        <span class="eyebrow">Newsletter</span>
+        <p>Suscribite para recibir nuestras novedades y promociones.</p>
+        <form id="nl" novalidate>
+          <label for="nl-email" class="sr-only">Email</label>
+          <input id="nl-email" type="email" placeholder="tu@email.com" required autocomplete="email">
+          <button class="btn btn-primary" type="submit">Suscribirme</button>
+        </form>
+        <p class="msg" id="nl-msg" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="cols">
+      <div>
+        <img class="flogo" src="https://www.survans.com.uy/Content/Images/uploaded/Nosotros/logo-footer-survans.png" alt="SURVANS" onerror="this.replaceWith(Object.assign(document.createElement('div'),{className:'wordmark',textContent:'SURVANS'}))">
+        <p>Transfers y traslado de pasajeros en Uruguay desde hace más de 20 años.</p>
+        <img src="https://www.survans.com.uy/Content/Images/uploaded/ceprotur-logo.png" alt="Ceprotur" style="height:40px;width:auto;margin-top:16px" onerror="this.remove()">
+      </div>
+      <div>
+        <h4>Servicios</h4>
+        <ul>
+          <li><a href="#servicios">Transfers</a></li>
+          <li><a href="#personal">Traslado de personal</a></li>
+          <li><a href="#barrios">Barrios privados</a></li>
+          <li><a href="#tours">Tours</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Clientes</h4>
+        <ul>
+          <li><a href="#barrios">Reservar por WhatsApp</a></li>
+          <li><a href="#seguimiento">Seguí tu van</a></li>
+          <li><a href="#accesos">Accesos a paneles</a></li>
+          <li><a href="#" id="ta-link">Conocé más en TripAdvisor</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Información</h4>
+        <ul>
+          <li><a href="#">Política de privacidad</a></li>
+          <li><a href="#">Condiciones de uso</a></li>
+          <li><a href="#contacto">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="legal">
+      <span>Copyright © <span id="year">2026</span> SURVANS. Todos los derechos reservados.</span>
+      <span>Hecho por Artificialmente</span>
+    </div>
+  </div>
+</footer>
+
+<a class="wa-float" href="#" data-wa="general" aria-label="Escribinos por WhatsApp"><svg><use href="#i-wa"/></svg><span class="t">¿Reservamos?</span></a>
+
+<script>
+/* ===== Configuración: completar antes de publicar ===== */
+const CONFIG = {
+  whatsapp: {
+    general:  "59898502880",   // +598 98 502 880
+    empresas: "59898485990",   // +598 98 485 990
+    reservas: "59898502880"    // TODO: número del asistente IA de reservas de barrios
+  },
+  defaultMsg: {
+    general:  "Hola Survans, quiero hacer una consulta.",
+    empresas: "Hola Survans, quiero cotizar un servicio.",
+    reservas: "Hola, quiero reservar un lugar en la van de mi barrio."
+  },
+  bookingOpensHours: 24,
+  bookingClosesMinutes: 15,
+  panels: { barrio: "", general: "", choferes: "" }, // TODO: URLs de los paneles
+  tripadvisor: ""                                     // TODO: URL de la ficha de TripAdvisor
+};
+
+const waUrl = (key, msg) => `https://wa.me/${CONFIG.whatsapp[key] || CONFIG.whatsapp.general}?text=${encodeURIComponent(msg || CONFIG.defaultMsg[key] || "")}`;
+document.querySelectorAll("[data-wa]").forEach(a => {
+  a.href = waUrl(a.dataset.wa, a.dataset.msg);
+  a.target = "_blank"; a.rel = "noopener";
+});
+document.querySelectorAll("[data-panel]").forEach(a => {
+  const url = CONFIG.panels[a.dataset.panel];
+  if (url) { a.href = url; a.previousElementSibling?.remove(); }
+  else { a.setAttribute("aria-disabled", "true"); a.removeAttribute("href"); }
+});
+const ta = document.getElementById("ta-link");
+if (CONFIG.tripadvisor) { ta.href = CONFIG.tripadvisor; ta.target = "_blank"; ta.rel = "noopener"; } else ta.parentElement.remove();
+document.getElementById("year").textContent = new Date().getFullYear();
+
+/* ===== Menú móvil ===== */
+const nav = document.getElementById("nav"), toggle = document.querySelector(".menu-toggle");
+toggle.addEventListener("click", () => {
+  const open = nav.classList.toggle("open");
+  toggle.setAttribute("aria-expanded", open);
+});
+nav.addEventListener("click", e => { if (e.target.closest("a")) { nav.classList.remove("open"); toggle.setAttribute("aria-expanded", "false"); } });
+
+/* ===== Hero slider ===== */
+(() => {
+  const hero = document.querySelector(".hero");
+  const slides = [...hero.querySelectorAll(".slide")];
+  const dotsWrap = hero.querySelector(".dots");
+  const DURATION = 7000;
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  let i = 0, timer = null, paused = false, startedAt = 0, remaining = DURATION;
+
+  const dots = slides.map((s, n) => {
+    const b = document.createElement("button");
+    b.className = "dot"; b.setAttribute("role", "tab");
+    b.setAttribute("aria-label", `Ir a la diapositiva ${n + 1}`);
+    b.style.setProperty("--dur", DURATION + "ms");
+    b.innerHTML = `<span class="lbl">${s.querySelector("h1").textContent}</span><span class="track"><span class="fill"></span></span>`;
+    b.addEventListener("click", () => go(n));
+    dotsWrap.appendChild(b);
+    return b;
+  });
+
+  function render() {
+    slides.forEach((s, n) => {
+      const on = n === i;
+      s.classList.toggle("is-active", on);
+      s.setAttribute("aria-hidden", !on);
+      s.querySelectorAll("a,button").forEach(el => on ? el.removeAttribute("tabindex") : el.setAttribute("tabindex", "-1"));
+    });
+    dots.forEach((d, n) => {
+      d.classList.toggle("is-done", n < i);
+      d.classList.remove("is-active");
+      d.setAttribute("aria-selected", n === i);
+    });
+    void dots[i].offsetWidth; // reinicia la animación de progreso
+    dots[i].classList.add("is-active");
+  }
+  function schedule(ms) {
+    clearTimeout(timer);
+    if (reduce || paused) return;
+    startedAt = Date.now(); remaining = ms;
+    timer = setTimeout(() => go(i + 1), ms);
+  }
+  function go(n) {
+    i = (n + slides.length) % slides.length;
+    render(); schedule(DURATION);
+  }
+  function pause() {
+    if (paused) return; paused = true; hero.classList.add("paused");
+    clearTimeout(timer); remaining -= Date.now() - startedAt;
+  }
+  function resume() {
+    if (!paused) return; paused = false; hero.classList.remove("paused");
+    schedule(Math.max(remaining, 400));
+  }
+  hero.querySelectorAll(".arrow").forEach(b => b.addEventListener("click", () => go(i + Number(b.dataset.dir))));
+  hero.addEventListener("mouseenter", pause);
+  hero.addEventListener("mouseleave", resume);
+  hero.addEventListener("focusin", pause);
+  hero.addEventListener("focusout", e => { if (!hero.contains(e.relatedTarget)) resume(); });
+  hero.addEventListener("keydown", e => { if (e.key === "ArrowLeft") go(i - 1); if (e.key === "ArrowRight") go(i + 1); });
+  document.addEventListener("visibilitychange", () => document.hidden ? pause() : resume());
+  // Swipe en móvil
+  let x0 = null;
+  hero.addEventListener("touchstart", e => { x0 = e.touches[0].clientX; }, { passive: true });
+  hero.addEventListener("touchend", e => {
+    if (x0 === null) return; const dx = e.changedTouches[0].clientX - x0; x0 = null;
+    if (Math.abs(dx) > 50) go(i + (dx < 0 ? 1 : -1));
+  });
+  // Precarga de imágenes
+  slides.forEach(s => { const m = s.querySelector(".bg").style.backgroundImage.match(/url\(["']?(.*?)["']?\)/); if (m) new Image().src = m[1]; });
+  render(); schedule(DURATION);
+})();
+
+/* ===== Ventana de reserva (abre 24 h antes, cierra 15 min antes) ===== */
+(() => {
+  const $ = id => document.getElementById(id);
+  const date = $("dep-date"), time = $("dep-time"), barrio = $("barrio");
+  const win = $("window"), book = $("w-book");
+  let dir = "Ida";
+  const pad = n => String(n).padStart(2, "0");
+  const toLocalDate = d => `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}`;
+  const fmt = d => d.toLocaleString("es-UY", { weekday: "short", day: "numeric", month: "short", hour: "2-digit", minute: "2-digit", hour12: false });
+  const dur = ms => {
+    const m = Math.round(ms / 60000), h = Math.floor(m / 60), r = m % 60;
+    return h ? `${h} h ${pad(r)} min` : `${r} min`;
+  };
+  const tomorrow = new Date(Date.now() + 864e5);
+  date.value = toLocalDate(tomorrow);
+  date.min = toLocalDate(new Date());
+
+  document.querySelectorAll(".segmented button").forEach(b => b.addEventListener("click", () => {
+    document.querySelectorAll(".segmented button").forEach(x => x.setAttribute("aria-pressed", x === b));
+    dir = b.dataset.dir; update();
+  }));
+
+  function update() {
+    if (!date.value || !time.value) return;
+    const dep = new Date(`${date.value}T${time.value}`);
+    const opens = new Date(dep - CONFIG.bookingOpensHours * 36e5);
+    const closes = new Date(dep - CONFIG.bookingClosesMinutes * 6e4);
+    const now = new Date();
+    let state, status, detail;
+    if (now < opens) {
+      state = "soon"; status = `Abre en ${dur(opens - now)}`;
+      detail = `La reserva abre el ${fmt(opens)} y cierra el ${fmt(closes)}.`;
+    } else if (now < closes) {
+      state = "open"; status = "Reserva abierta";
+      detail = `Cierra en ${dur(closes - now)} (${fmt(closes)}).`;
+    } else {
+      state = "closed"; status = "Reserva cerrada";
+      detail = now < dep ? `Cerró 15 min antes de la salida. Elegí otro horario.` : `Esa salida ya pasó. Elegí otro día u horario.`;
+    }
+    win.dataset.state = state;
+    $("w-status").textContent = status;
+    $("w-detail").textContent = detail;
+    // Línea de tiempo: desde 6 h antes de la apertura hasta la salida
+    const t0 = opens - 6 * 36e5, t1 = +dep, span = t1 - t0;
+    const pct = t => Math.min(100, Math.max(0, (t - t0) / span * 100));
+    $("w-open").style.left = pct(+opens) + "%";
+    $("w-open").style.width = (pct(+closes) - pct(+opens)) + "%";
+    $("w-now").style.left = `calc(${pct(+now)}% - 1px)`;
+    $("w-now").style.opacity = now >= t0 && now <= t1 ? 1 : 0;
+    $("w-l1").textContent = `Abre ${fmt(opens)}`;
+    $("w-l2").textContent = `Salida ${fmt(dep)}`;
+    const b = barrio.value === "Otro" ? "mi barrio" : barrio.value;
+    const msg = `Hola, quiero reservar: ${b}, ${dir.toLowerCase()}, ${fmt(dep)}.`;
+    book.href = waUrl("reservas", msg); book.target = "_blank"; book.rel = "noopener";
+    if (state === "open") book.removeAttribute("aria-disabled"); else book.setAttribute("aria-disabled", "true");
+  }
+  [date, time, barrio].forEach(el => el.addEventListener("input", update));
+  update(); setInterval(update, 30000);
+})();
+
+/* ===== Newsletter (conectar a un backend) ===== */
+document.getElementById("nl").addEventListener("submit", e => {
+  e.preventDefault();
+  const email = document.getElementById("nl-email"), msg = document.getElementById("nl-msg");
+  if (!email.checkValidity()) { msg.style.color = "var(--danger)"; msg.textContent = "Revisá el email."; email.focus(); return; }
+  // TODO: enviar a la plataforma de newsletter
+  msg.style.color = "var(--success)"; msg.textContent = "Listo, ya estás suscrito."; email.value = "";
+});
+
+/* ===== Animaciones al hacer scroll + botón flotante ===== */
+const io = new IntersectionObserver(entries => entries.forEach(en => {
+  if (en.isIntersecting) { en.target.classList.add("in"); io.unobserve(en.target); }
+}), { threshold: .12, rootMargin: "0px 0px -40px 0px" });
+document.querySelectorAll(".reveal").forEach((el, n) => { el.style.transitionDelay = (n % 4) * 80 + "ms"; io.observe(el); });
+const fab = document.querySelector(".wa-float");
+const heroEl = document.querySelector(".hero");
+new IntersectionObserver(([e]) => fab.classList.toggle("show", !e.isIntersecting), { threshold: .2 }).observe(heroEl);
+</script>
+</body>
+</html>
